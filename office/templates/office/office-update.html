@@ -1,0 +1,18 @@
+<h1>
+<form class = "" action="" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	{% include 'office/form_template.html' %}
+	<input type="hidden" name="office_id" value="{{ object.project_detail.id }}">
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-success">पेश गर्नुहोस्</button>
+		</div>
+	</div>
+	{% if object.is_project == True %}
+	<a href=""  onclick="window.open(`{% url 'office:office-update-project' object.project_detail.id %}`, 'newwindow', 'width=800, height=600'); return false;"> Edit Project Details</a>
+	{% elif object.is_municipality == True %}
+	<a href=""  onclick="window.open(`{% url 'office:office-update-municipality' object.municipality_detail.id %}`, 'newwindow', 'width=800, height=600'); return false;"> Edit Municipality Details</a>
+	{% endif %}
+	
+
+</form>

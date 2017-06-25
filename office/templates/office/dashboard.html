@@ -1,0 +1,81 @@
+
+{% extends "base_layout.html" %}
+{% load filters %}
+{% load static %}
+
+{% block title %}fwdc{% endblock title %}
+
+{% block extra_styles %}{% endblock extra_styles %}
+
+
+{% block content %}
+
+      <div class="all-totals-list">
+        <div class="row">
+          <div class="all-totals">
+
+            <div class="col-md-4">
+              <div class="totals">
+                <h3>Total Submissions</h3>
+                <span>100</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="totals">
+                <h3>total offices</h3>
+                <span>20</span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="totals">
+                <h3>Total users</h3>
+                <span>100</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-body">
+
+        <div class="chart-section">
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Bar Chart</h3>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <canvas id="barChart" style="height:230px"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1059393.3436958205!2d80.50756992099542!3d29.28690855421674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39a1666b20c30d3d%3A0xb3a717378a19a012!2sFar-Western+Development+Region%2C+Nepal!5e0!3m2!1sen!2s!4v1498351003946"  width="100%" height="400px" frameborder="0" style="border:0" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="asideB asideb-changes">
+            <div class="evnt-act-caldr-hrdr">
+              <div id="calendarADate"></div>
+              <div id="calendarA"></div>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+
+
+{% endblock content %}
+
+<!-- ./wrapper -->

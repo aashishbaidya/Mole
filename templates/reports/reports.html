@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load filters %}
+
+{% block title %}Karyakrams{% endblock title %}
+
+{% block content %}
+<h2>Karyakram awadhi:{{awadhi}} <a href="{% url 'office:office-dashboard' office %}">Office Dashboard</a> </h2>
+{% for obj in object_list %}
+{{obj}} Lakxya [Paridam :{{obj.lakxya.first.paridam}}, Var :{{obj.lakxya.first.var}}, Budget :{{obj.lakxya.first.budget}}] ||||
+pragati
+[Paridam :{{obj.pragati.first.paridam}}, Var :{{obj.pragati.first.var}}, Budget :{{obj.pragati.first.budget}}]
+<br>
+{% endfor %}
+
+{% endblock content %}
+
+{% block extra_script %}
+{% endblock %}

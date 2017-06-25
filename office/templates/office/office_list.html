@@ -1,0 +1,10 @@
+	{% if all_offices %}
+	    <h1>All Offices</h1>
+	    <ul>
+	        {% for office in all_offices %}
+	       <h1>{{ office.id }}. {{ office.name }}</h1><a href="{% url 'office:office-update' office.id %}"></a>
+	        {% endfor %}
+	    </ul>
+	{% else %}
+	    <h3>No Offices</h3>
+	{%endif%}

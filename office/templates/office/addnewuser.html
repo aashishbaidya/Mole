@@ -1,0 +1,63 @@
+  <form method="post">
+            {% csrf_token %}
+
+
+                <div class="control-group">
+                 {{ form.username.errors }}
+                  <label class="control-label" for="{{ form.username.id_for_label }}">प्रयोगकर्ता नाम</label>
+                  <div class="controls">
+                    {{ form.username }}
+                  </div>
+                </div>
+                <div class="control-group">
+                {{ form.email.errors }}
+                  <label class="control-label" for="{{ form.email.id_for_label }}">इमेल</label>
+
+                  <div class="controls">
+                    {{ form.email }}
+                  </div>
+                </div>
+
+
+ <div class="control-group" style="display: none;">
+                 {{ form.password1.errors }}
+                  <label class="control-label" for="{{ form.password1.id_for_label }}">पासवर्ड</label>
+                  <div class="controls">
+                    {{ form.password1 }}
+                  </div>
+
+
+
+
+               
+
+
+                 {{ form.password2.errors }}
+                  <label class="control-label" for="{{ form.password2.id_for_label }}">पासवर्ड</label>
+                  <div class="controls">
+                    {{ form.password2 }}
+                  </div>
+                </div>
+
+               
+                <input type="hidden" name = "role" value="{{ role }}">
+                <input type="hidden" name = "office" value="{{ office_id }}">
+
+
+
+
+
+
+
+
+
+              <div class="form-actions">
+
+
+ <input class="btn btn-primary" type="submit" value="पेश गर्नुहोस्" />
+
+
+                <div id="status"></div>
+              </div>
+              <div id="submitted"></div>
+            </form>

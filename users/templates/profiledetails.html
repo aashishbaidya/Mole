@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Matrix Admin</title>
+{% load staticfiles %}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/bootstrap-responsive.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/matrix-style.css' %}" />
+<link rel="stylesheet" href="{% static 'css/matrix-media.css' %}" />
+
+<link rel="stylesheet" href="{% static 'css/imgcropper.css' %}" />
+<link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+
+<script src="{% static 'js/imgcropper.js' %}"></script> 
+
+</head>
+<body>
+
+<!--Header-part-->
+<script type="text/javascript">
+
+    $(function () {
+
+      /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
+      $("#id_photo").change(function () {
+        if (this.files && this.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            $("#image").attr("src", e.target.result);
+            $("#modalCrop").modal("show");
+          }
+          reader.readAsDataURL(this.files[0]);
+        }
+      });
+
+      /* SCRIPTS TO HANDLE THE CROPPER BOX */
+      var $image = $("#image");
+      var cropBoxData;
+      var canvasData;
+      $("#modalCrop").on("shown.bs.modal", function () {
+        $image.cropper({
+          viewMode: 1,
+          aspectRatio: 1/1,
+          minCropBoxWidth: 200,
+          minCropBoxHeight: 200,
+          ready: function () {
+            $image.cropper("setCanvasData", canvasData);
+            $image.cropper("setCropBoxData", cropBoxData);
+          }
+        });
+      }).on("hidden.bs.modal", function () {
+        cropBoxData = $image.cropper("getCropBoxData");
+        canvasData = $image.cropper("getCanvasData");
+        $image.cropper("destroy");
+      });
+
+      $(".js-zoom-in").click(function () {
+        $image.cropper("zoom", 0.1);
+      });
+
+      $(".js-zoom-out").click(function () {
+        $image.cropper("zoom", -0.1);
+      });
+
+      /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+      $(".js-crop-and-upload").click(function () {
+        var cropData = $image.cropper("getData");
+        $("#id_x").val(cropData["x"]);
+        $("#id_y").val(cropData["y"]);
+        $("#id_height").val(cropData["height"]);
+        $("#id_width").val(cropData["width"]);
+
+        
+      });
+
+    });
+  
+</script>
+
+  
+  <div class="container-fluid">
+  
+
+    <div class="row-fluid">
+     <center>
+        <div class="widget-box" style="width: 600px;">
+          <div class="widget-title"> <span class="icon"> <i class="icon-pencil"></i> </span>
+            <h5>Welcome, User</h5>
+          </div>
+          <div class="widget-content nopadding">
+
+            <form id="form-wizard" class="form-horizontal" enctype="multipart/form-data" action = "{% url 'users:firstlogin' %}" method="post">
+            {% csrf_token %}
+              <div id="form-wizard-1" class="step">
+                <h5>Please set your password.</h5>
+                <div class="control-group">
+                {{ userform.password1.errors }}
+                  <label class="control-label">Password</label>
+                  <div class="controls">
+                   {{ userform.password1 }}
+                  </div>
+                </div>
+                <div class="control-group">
+                {{ userform.password1.errors }}
+                  <label class="control-label">Confirm Password</label>
+                  <div class="controls">
+                    {{ userform.password2 }}
+                  </div>
+                </div>
+
+         
+              </div>
+              <div id="form-wizard-2" class="step">
+
+
+
+
+
+
+
+                <div class="control-group">
+                 {{ photoform.name.errors }}
+                  <label class="control-label">{{ photoform.name.label_tag }}</label>
+                  <div class="controls">
+                    {{ photoform.name }}
+                  </div>
+                </div>
+
+                <div class="control-group">
+                 {{ photoform.phoneno.errors }}
+                  <label class="control-label">{{ photoform.phoneno.label_tag }}</label>
+                  <div class="controls">
+                    {{ photoform.phoneno }}
+                  </div>
+                </div>
+
+                <div class="control-group">
+                 {{ photoform.photo.errors }}
+                  <label class="control-label">{{ photoform.photo.label_tag }}</label>
+                  <div class="controls">
+                    {{ photoform.photo }}
+                  </div>
+                </div>
+
+
+             
+                    {{ photoform.x }}
+                
+                    {{ photoform.y }}
+                 
+                    {{ photoform.width }}
+                 
+                    {{ photoform.height }}
+                  
+
+
+
+
+              </div>
+
+
+              <div class="form-actions">
+              <input type="hidden" name="uidb64" value="{{ uid }}">
+                <input id="back" class="btn btn-primary" type="reset" value="Back" />
+                <input id="next" class="btn btn-primary" type="submit" value="Next" />
+                <div id="status"></div>
+              </div>
+              <div id="submitted"></div>
+
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+        <div class="modal fade" id="modalCrop">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Crop the photo</h4>
+        </div>
+        <div class="modal-body">
+          <img src="" id="image" style="max-width: 100%;">
+        </div>
+        <div class="modal-footer">
+          <div class="btn-group pull-left" role="group">
+            <button type="button" class="btn btn-default js-zoom-in">
+              <span class="glyphicon glyphicon-zoom-in"></span>
+            </button>
+            <button type="button" class="btn btn-default js-zoom-out">
+              <span class="glyphicon glyphicon-zoom-out"></span>
+            </button>
+          </div>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
+          <button type="button" class="btn btn-primary js-crop-and-upload" data-dismiss="modal">Crop and upload</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+</center>
+  </div>
+
+
+<script src="{% static 'js/jquery.ui.custom.js' %}"></script> 
+<script src="{% static 'js/bootstrap.min.js' %}"></script> 
+<!-- <script src="{% static 'js/jquery.validate.js' %}"></script>  -->
+<script src="{% static 'js/jquery.wizard.js' %}"></script> 
+<script src="{% static 'js/matrix.js' %}"></script> 
+
+<script src="{% static 'js/matrix.wizard.js' %}"></script>
+</body>
+</html>

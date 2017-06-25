@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load filters %}
+
+{% block title %}Karyakrams{% endblock title %}
+
+{% block content %}
+<h2>Karyakram haru <a href="{% url 'office:office-dashboard' office %}">Office Dashboard</a> </h2>
+{% for obj in object_list %}
+{{obj}} <a href="">Barsik Lakxya</a> <a href="">Pratham Pragati</a> <a href="">Dosro Lakxya</a> <a href="">Dosro Pragati</a>
+<a href="">tesro Lakxya</a><a href="">tesro Pragati</a> <br>
+{% endfor %}
+
+{% endblock content %}
+
+
+{% block extra_script %}
+{% endblock %}

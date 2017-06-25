@@ -1,0 +1,338 @@
+.invisible{display:none;}
+.visible{display:block;}
+
+
+/* CENTER CALENDAR TABLE AND MAKE IT RESPONSIVE */
+.ui-datepicker-calendar{
+  width: 100%;
+}
+
+/*.ui-datepicker-calendar tbody tr td span,
+.ui-datepicker-calendar tbody tr td a
+{
+  width: 100% !important;
+}*/
+
+
+/* Reset */
+.ui-datepicker,
+.ui-datepicker table,
+.ui-datepicker tr,
+.ui-datepicker td,
+.ui-datepicker th {
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-spacing: 0;
+}
+
+/* Calendar Wrapper */
+
+.event-section {
+   width: 300px;
+    position: absolute;
+    z-index: 9999;
+    background: #fafafa;
+}
+.event-section .ui-datepicker-calendar .ui-state-default{color: #fff;}
+
+.event-section .ui-datepicker-other-month .ui-state-default{    color: #f974a5;}
+.event-section:before{
+   position: absolute;
+    bottom: 100%;
+    left: 35px;
+    content: "";
+    width: 0; 
+   height: 0; 
+   border-left: 7px solid transparent;
+   border-right: 7px solid transparent;
+   border-bottom: 7px solid #8d0034;
+}
+
+.ui-datepicker {
+  display: none;
+  cursor: default;
+
+  text-transform: uppercase;
+  font-size: 10px;
+  background: #8d0034;  
+  padding: 10px;
+}
+
+/* Calendar Header */
+.ui-datepicker-header {
+  position: relative;
+}
+
+.ui-datepicker-title { text-align: left;    padding-left: 15px; }
+
+
+a.ui-datepicker-prev.ui-corner-all {
+    position: absolute;
+    right: 40px;
+    top: 25px;
+    width: 15px;
+    height: 15px;
+    background: url(../Images/prev.png);
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: center center;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+
+a.ui-datepicker-next.ui-corner-all {
+    position: absolute;
+    right: 20px;
+    top: 25px;
+    width: 15px;
+    height: 15px;
+    background: url(../Images/next.png);
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: center center;
+    text-indent: -9999px;
+    cursor: pointer;
+}
+
+/* Month */
+.ui-datepicker-month {
+  position: relative;
+  color: #fff;
+  font-size:16px;
+}
+
+/* Year */
+.ui-datepicker-year {
+  display: block;
+  color: #fff;
+  font-size:20px;
+}
+
+/* Prev Next Month */
+
+
+
+/* Calendar "Days" */
+.ui-datepicker-calendar th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  
+  text-align: center;
+  font-weight: normal;
+  color: #fff;
+}
+
+.ui-datepicker-calendar td {
+  
+  text-align: center;
+  line-height: 22px;
+}
+
+.ui-datepicker-calendar .ui-state-default {
+  display: block;
+  width: 26px;
+  outline: none;
+  border:1px solid transparent;
+
+  text-decoration: none;
+}
+
+/* Days with events */
+.dayWithEvents a { color: #e6b018 !important; }
+
+/* Days with no events */
+.no-events{
+  background:#fff0d2;
+  border:1px solid #edcd8c;
+  padding:15px 10px;
+  font-weight:bold;
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  -o-border-radius: 3px;
+  border-radius:3px;
+}
+
+/* Day Active State*/
+.ui-datepicker-calendar .ui-state-active {
+ color: #8d0034 !important;
+    border-radius: 50%;
+    background: #fff !important;
+    font-weight: bold;
+}
+
+
+
+.up-com-evnts .ui-datepicker-calendar .ui-state-active {}
+/* Other Months Days*/
+.ui-datepicker-other-month .ui-state-default { color: #5e6670; }
+
+
+/* CALENDAR OF EVENTS - EVENTS LISTING */
+
+.content-title h2{
+    font-size: 22px;
+    text-align: left;
+    padding: 0px 20px;
+}
+
+.event-list li {
+    padding: 5px 15px;
+}
+
+.event-list li a {
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    color: #333;
+}
+
+h4.event-heading {
+    margin:auto 0;
+    width: 60%;
+    text-align: left;
+    font-size: 15px;
+    color: #8d0034;
+}
+
+.event-list li a time {
+    text-align: right;
+}
+
+.event-list a time span {
+    display: block;
+}
+
+.event-list li:nth-child(odd) ,  .toggle-section > ul > li:nth-child(odd) {
+    background: #f0f1f3;
+}
+
+/*next-calendar*/
+
+div#calendarA .ui-datepicker {
+    background: #009887;
+}
+
+div#calendarA  .ui-datepicker-calendar .ui-state-active {
+    color: #FFF;
+    border: 1px solid transparent;
+    border-radius: 100%;
+    background: #ffcd34;
+}
+
+div#calendarA  .ui-datepicker-header > a{
+  display: none;
+}
+
+div#calendarA  .ui-datepicker-month{
+  font-size: 36px;
+}
+
+div#calendarA .ui-datepicker-title {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    display: none;
+}
+
+div#calendarA .ui-datepicker-title span.ui-datepicker-year{
+  margin:auto;
+}
+
+div#calendarADate {
+    display: -webkit-flex;
+    display: flex;
+    color:#FFF;
+    font-weight: 700;
+    height: 80px;
+}
+
+.month-section div {
+   font-size: 46px;
+    text-align: center;
+    vertical-align: bottom;
+    line-height: 110px;
+}
+
+.date-year , .month-section {
+   -webkit-flex:1;
+    -ms-flex: 1;
+    flex:1;
+    text-align: center;
+}
+
+.date-year div.year {
+    font-size: 20px;
+}
+
+.date-year div.day {
+    position: relative;
+    font-size: 60px;
+    color: #ffcd34;
+    top: -20px;
+}
+
+
+
+
+/*new css changes==================*/
+.asideb-changes{
+    background: #F4F4F4;
+}
+.asideb-changes #calendarA .ui-datepicker {
+    background: #f4f4f4;
+}
+.asideb-changes .month-section div {
+    font-size: 46px;
+    text-align: left;
+    vertical-align: bottom;
+    line-height: 110px;
+    color: #405058;
+    font-family: georgia;
+    font-weight: bold;
+}
+.asideb-changes .date-year div.day {
+    position: relative;
+    font-size: 60px;
+    color: #8F0032;
+    top: -20px;
+}
+.asideb-changes .ui-datepicker-calendar th {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
+    color: #405058;
+    font-weight: bold;
+    font-family: georgia;
+    text-transform: lowercase;
+}
+.asideb-changes .ui-datepicker-other-month .ui-state-default {
+    color: #aeb0b3 !important;
+}
+.asideb-changes .ui-state-default, .asideb-changes .ui-widget-content .ui-state-default {
+    background: transparent !important;
+    border: 0 !important;
+    color: #405058;
+    font-family: georgia;
+    font-weight: bold;
+}
+.asideb-changes .ui-datepicker-calendar .ui-state-default {
+    /*width: auto;*/
+}
+.asideb-changes .ui-datepicker {
+    font-size: 12px;
+}
+.asideb-changes .date-year div.year {
+    font-size: 20px;
+    text-shadow: 3px 3px 7px rgba(150, 150, 150, 0.33);
+}
+.asideb-changes .ui-datepicker-calendar .ui-state-active {
+    color: #405058 !important;
+    border-radius: 0;
+    background: #ffcd34 !important;
+    font-weight: bold;
+}
+
+
+/*new css changes==================*/

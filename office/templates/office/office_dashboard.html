@@ -1,0 +1,146 @@
+{% extends "base_layout.html" %}
+{% load staticfiles %}
+{% load filters %}
+
+{% block title %}{{office}}{% endblock title %}
+
+{% block content %}
+
+{% ifrole "office_head" %}
+Admin : Office Admin Name
+{% endrole %}
+
+
+{% ifrole "office_head" %}
+Information OFficer: Officer Name
+{% endrole %}
+
+
+
+
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-body">
+
+          <div class="office-selected">
+            <div class="col-md-6">
+              <div class="office-head-detail">
+                <div class="img-office-holder">
+                  <img src="dist/img/logo.png">
+                </div>
+                <h3 class="name-office">{{office}}</h3>
+                <p class="address-office">dadeldhura</p>
+              </div>
+              <div class="office-selected-btns">
+              <a href="#">view details</a>
+              <a href="#">users</a>
+              <a href="#">submit file</a>
+              <a href="#">program</a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="map-office">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1059393.3436958205!2d80.50756992099542!3d29.28690855421674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39a1666b20c30d3d%3A0xb3a717378a19a012!2sFar-Western+Development+Region%2C+Nepal!5e0!3m2!1sen!2s!4v1498351003946"  width="100%" height="400px" frameborder="0" style="border:0" allowfullscreen></iframe>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="barsik-table">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Firstname</th>
+                      <th>Lastname</th>
+                      <th>Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for karyakram in karyakrams %}
+                    <tr>
+                       <td>{{ karyakram.id }}. {{ karyakram.name }}
+
+                       </td>
+                       <td><a href="{% url 'office:office-update' office.id %}">test</a></td>
+                       <!-- <td>{{ karyakram.parent.all.0.id }}</td> -->
+
+                       {% for p in karyakram.parent.all %}
+                          <td>{{ p.name }}</td>
+                       {% endfor %}
+                    </tr>
+                    {% endfor %}
+                    
+                   
+                  </tbody>
+                </table>  
+              </div>
+              <div class="yearly">
+                <div class="col-md-4">
+                  <div class="yearly-4monthly text-center">
+                    <h3>yearly / 4 monthly</h3>
+                    <p>lakchya ra pragati</p>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="col-md-6">
+                    <div class="lakchya lekchya">
+                      <h3>lakchya</h3>
+                      <a href="#">pratham</a>
+                      <a href="#">dosro</a>
+                      <a href="#">tesro</a>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="lakchya">
+                      <h3>pragati</h3>
+                      <a href="#">pratham</a>
+                      <a href="#">dosro</a>
+                      <a href="#">tesro</a>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="yearly monthly">
+                <div class="col-md-4">
+                  <div class="yearly-4monthly monthley text-center">
+                    <h3>monthly</h3>
+                    <p>lakchya ra pragati</p>
+                  </div>  
+                </div>
+                <div class="col-md-8">
+                  <div class="view-edit-t">
+                    <div class="view-edit-tc">
+                      <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> view</a>
+                      <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> edit</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>  
+            </div>
+          </div> 
+
+
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+
+    </section>
+
+{% endblock content %}
+
+
+
+
+
+
+
+{% block extra_script %}
+{% endblock extra_script %}
