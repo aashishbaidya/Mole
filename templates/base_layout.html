@@ -1,24 +1,25 @@
-
-<!DOCTYPE html>
+<!doctype html>
 
     <head>
-	{% load static %}
-
+		{% load static %}
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>{% block title %}{% endblock %}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>{% block title %}{% endblock %}</title>
-
-	{% block stylesheets %}
+		{% block stylesheets %}
 
         <link rel="apple-touch-icon" href="{% static 'apple-touch-icon.png' %}">
         <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+		<script src="{% static 'assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
 		<link href="https://fonts.googleapis.com/css?family=Ek+Mukta:200,300,400,500,600,700,800&amp;subset=devanagari,latin-ext" rel="stylesheet">
-    {% endblock %}
 
-	{% block extra_styles %}{% endblock extra_styles %}
-	</head>
+		{% endblock %}
+
+		{% block extra_styles %}{% endblock extra_styles %}
+
+
+</head>
     <body>
          	<!--Header Starts-->
 		<header id="app-header">
@@ -29,8 +30,8 @@
 							<a href="javascript:void(0)" title="Nepal Government">
 								<img src="{% static 'assets/images/logo.png' %}" alt="Logo" height="80">
 							</a>
-							<h4>Digital Progress Monitoring System<br/>
-							Ministry of Labour & Employment</h4>
+							<h4>Digital Progress Monitoring System</h4>
+							<h5>Ministry of Labour & Employment</h5>
 						</div>
 					</div>
 				</div>
@@ -42,15 +43,13 @@
 		<aside id="app-sidebar">
 			<ul class="sidebar-navigation">
 				<li class="active">
-					<a href="index.php" title=""><i class="fa fa-home"></i>गृह पृष्ठ</a>
+					<a href="{% url 'office:dashboard' %}" title=""><i class="fa fa-home"></i>गृह पृष्ठ</a>
 				</li>
 				<li class="has-child">
 					<a href="#" title=""><i class="fa fa-building-o"></i>सम्बन्धित निकाय</a>
 					<ul>
 						{% for office in offices %}
-
 						<li><a href="{% url 'office:office-dashboard' office.id %}" title=""><i class="fa fa-long-arrow-right"></i>{{office}}</a></li>
-
 						{% endfor %}
 
 					</ul>
@@ -72,10 +71,8 @@
 			{% block content %}
 
     		{% endblock content %}
-
 		<!--Main Content Area Ends-->
 
-		<!--<?php require_once('app-footer.php');?> -->
 		<footer id="app-footer">
 			<div class="container-fluid">
 				<div class="row">
@@ -86,18 +83,16 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</footer>
 
-		{% block scripts %}
-			<script src="{% static 'assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
-			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-         	<script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
+		 {% block scripts %}
+		 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 			<script src="{% static 'assets/js/vendor/bootstrap.min.js' %}"></script>
 			<script src="{% static 'assets/js/plugins.js' %}"></script>
 
+		 {% endblock scripts %}
 
-		{% endblock scripts %}
-		{% block extra_scripts %}{% endblock extra_scripts %}
+		 {% block extra_scripts %}{% endblock extra_scripts %}
 
-     </body>
+    </body>
 </html>

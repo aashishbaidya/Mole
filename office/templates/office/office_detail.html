@@ -8,8 +8,8 @@
 <!--Main Content Area Starts-->
 		<section id="app-section">
 			<ol class="breadcrumb no-margin margin-top-lg">
-			  <li><a href="index.php">गृह पृष्ठ</a></li>
-			  <li><a href="page-office.php">वैदेशिक रोजगार विभाग</a></li>
+			  <li><a href="{% url 'office:dashboard' %}">गृह पृष्ठ</a></li>
+			  <li><a href="{% url 'office:office-dashboard' office.id %}">वैदेशिक रोजगार विभाग</a></li>
 			  <li class="active">View Detail</li>
 			</ol>
 			<div class="bg-white padding margin-top-lg">

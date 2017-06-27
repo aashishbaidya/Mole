@@ -15,7 +15,7 @@
 						<div class="thumbnail">
 							<img src="{% static 'assets/images/img-office.png' %}" alt="...">
 							<div class="caption">
-								<h5>वैदेशिक रोजगार विभाग</h5>
+								<h5>{{office}}</h5>
 							</div>
 						</div>
 					</div>
@@ -70,6 +70,26 @@
 									<th><a href="#" title="" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i> View</a></th>
 									<th><a href="#" title="" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a></th>
 								</tr>
+								<tr>
+									<th>कार्य सम्पादन सूचक </th>
+									<th><a href="#" title="" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i> View</a></th>
+									<th><a href="#" title="" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a></th>
+								</tr>
+								<tr>
+									<th>बजेट बक्तब्य </th>
+									<th><a href="#" title="" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i> View</a></th>
+									<th><a href="#" title="" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a></th>
+								</tr>
+								<tr>
+									<th>सचिब बैठक प्रगति </th>
+									<th><a href="#" title="" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i> View</a></th>
+									<th><a href="#" title="" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a></th>
+								</tr>
+								<tr>
+									<th>बार्षिक चौमासिक प्रगति  </th>
+									<th><a href="#" title="" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i> View</a></th>
+									<th><a href="#" title="" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a></th>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -81,6 +101,7 @@
 
 {% endblock content %}
 
+        <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
 
 		{% block extra_scripts %}
             <script>
