@@ -2,71 +2,102 @@
 {% load staticfiles %}
 {% load filters %}
 
-{% block title %}{{district}}{% endblock title %}
+{% block title %}fwdc {{district}}{% endblock title %}
 
 {% block content %}
 
+		<!--Main Content Area Starts-->
+		<section id="app-section">
+			<div class="bg-white padding margin-top-lg">
+				<div class="row">
+					<div class="col-md-4 col-lg-3">
+						<!--Office Image-->
+						<div class="thumbnail">
+							<img src="{% static 'assets/images/img-office.png' %}" alt="...">
+							<div class="caption">
+								<h5>वैदेशिक रोजगार विभाग</h5>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8 col-lg-9">
+						<!--Office Map-->
+						<div id="map" style="width:100%;height:279px"></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<a href="view-detail.php" title="" class="btn btn-sm btn-primary btn-block margin-top-lg">View Detail</a>
+				</div>
+				<div class="col-md-3">
+					<a href="users.php" title="" class="btn btn-sm btn-primary btn-block margin-top-lg">Users</a>
+				</div>
+				<div class="col-md-3">
+					<a href="submit-file.php" title="" class="btn btn-sm btn-primary btn-block margin-top-lg">Submit File</a>
+				</div>
+				<div class="col-md-3">
+					<a href="programs.php" title="" class="btn btn-sm btn-primary btn-block margin-top-lg">कार्यक्रम</a>
+				</div>
+			</div>
+			<ul class="different-list margin-top-lg">
+				<li>
+					<div class="table-responsive">
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th rowspan="2">वार्षिक/चौमासिक लक्ष्य र प्रगति</th>
+									<th>लक्ष्य</th>
+									<th><a href="l-first.php" title="" class="btn btn-xs btn-primary">प्रथम</a></th>
+									<th><a href="" title="" class="btn btn-xs btn-primary">चौमासिक</a></th>
+									<th><a href="#" title="" class="btn btn-xs btn-primary">वार्षिक</a></th>
+								</tr>
+								<tr>
+									<th>प्रगति</th>
+									<th><a href="l-second.php" title="" class="btn btn-xs btn-primary">प्रथम</a></th>
+									<th><a href="#" title="" class="btn btn-xs btn-primary">चौमासिक</a></th>
+									<th><a href="#" title="" class="btn btn-xs btn-primary">वार्षिक</a></th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</li>
+				<li>
+					<div class="table-responsive">
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>मासिक लक्ष्य र प्रगति</th>
+									<th><a href="#" title="" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i> View</a></th>
+									<th><a href="#" title="" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a></th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</li>
+			</ul>
+		</section>
+		<div class="clearfix"></div>
+		<!--Main Content Area Ends-->
 
-      <!-- Default box -->
-      <div class="box">
-        <div class="box-body">
 
-          <div class="district-selected">
-              <h3 class="district-name text-center">{{district}}</h3>
-          </div>
-          <div class="tabs-for-selection text-center">
-             <ul class="nav nav-tabs">
-              <li class="active"><a data-toggle="tab" href="#office">office</a></li>
-              <li><a data-toggle="tab" href="#vdc">vdcs/Municipality</a></li>
-            </ul>
+        {% block extra_scripts %}
 
+            <script>
+                function myMap() {
+                    var myCenter = new google.maps.LatLng(51.508742,-0.120850);
+                    var mapCanvas = document.getElementById("map");
+                    var mapOptions = {center: myCenter, zoom: 5};
+                    var map = new google.maps.Map(mapCanvas, mapOptions);
+                    var marker = new google.maps.Marker({position:myCenter});
+                    marker.setMap(map);
+                }
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDmkU1cjj2GkxzKoYWZV987q0sIGCL3Ps&callback=myMap"></script>
 
-            <div class="tab-content">
-              <div id="office" class="tab-pane fade in active">
-                <div class="list-of-offices">
-                    {% for project in projects %}
-                  <div class="col-md-3">
-                    <div class="office text-center">
-                      <div class="logo-office">
-                        <img src=" {% static 'dist/img/logo.png' %}">
-                      </div>
-                      <div class="office-details">
-                        <h3 class="name"><a href="{% url 'office:office-dashboard' project.id %}">{{project}}</a></h3>
-                        <p class="address">{{project.address}}</p>
-                      </div>
-                    </div>
-                  </div>
-                    {% endfor %}
+		{% endblock extra_scripts %}
 
 
-                </div>
-              </div>
-              <div id="vdc" class="tab-pane fade">
-                <div class="list-of-offices">
 
- {% for municipality in municipalitys %}
-                  <div class="col-md-3">
-                    <div class="office text-center">
-                      <div class="logo-office">
-                        <img src=" {% static 'dist/img/logo.png' %}">
-                      </div>
-                      <div class="office-details">
-                        <h3 class="name"><a href="{% url 'office:office-dashboard' municipality.id %}">{{municipality}}</a></h3>
-                        <p class="address">{{municipality.address}}</p>
-                      </div>
-                    </div>
-                  </div>
-{% endfor %}
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          </div>
-
-
-        </div>
 
 {% endblock content %}
 

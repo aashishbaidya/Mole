@@ -76,13 +76,12 @@ class MunicipalityDetail(models.Model):
 	sub_mayor_address = models.CharField(verbose_name="उप-मयेर/अध्यक्षको ठेगाना ", max_length=30, blank=True)
 	ward_chief_details = models.TextField(verbose_name="वडा प्रमुखको विवरण ", blank=True)
 	office = models.OneToOneField(Office,verbose_name="कार्यालय", related_name="municipality_detail", on_delete=models.CASCADE)
-	is_municipality = models.BooleanField(default=True)
 
 	def __unicode__(self):
 		return u'%s'%(self.office.name)
 
-# class OfficeSetting(models.Model):
-# 	fiscalyear = models.ForeignKey(FiscalYear, verbose_name="", max_length=90, on_delete=models.CASCADE)
-# 	office = models.OneToOneField(Office, verbose_name="", on_delete=models.CASCADE)
-# 	def __unicode__(self):
-# 		return u'%s'%(self.office.id) + "--" + u'%s'%(self.fiscalyear)
+class OfficeSetting(models.Model):
+	#fiscalyear = models.ForeignKey(FiscalYear, verbose_name="", max_length=90, on_delete=models.CASCADE)
+	office = models.OneToOneField(Office, verbose_name="", on_delete=models.CASCADE)
+	def __unicode__(self):
+		return u'%s'%(self.office.id) + "--" + u'%s'%(self.fiscalyear)

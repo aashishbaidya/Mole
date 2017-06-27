@@ -1,0 +1,144 @@
+{% extends "base_layout.html" %}
+{% load staticfiles %}
+{% load filters %}
+
+{% block title %}{% endblock title %}
+
+{% block content %}
+
+<section id="app-section">
+			<ol class="breadcrumb no-margin margin-top-lg">
+			  <li><a href="index.php">गृह पृष्ठ</a></li>
+			  <li><a href="page-office.php">वैदेशिक रोजगार विभाग</a></li>
+			  <li class="active">कार्यक्रम</li>
+			</ol>
+			<div class="bg-white padding margin-top-lg">
+				<div class="app-page-header">
+					<div class="row">
+						<div class="col-md-2">
+							<select class="form-control input-sm">
+							  <option>10</option>
+							  <option>20</option>
+							  <option>30</option>
+							  <option>40</option>
+							  <option>50</option>
+							</select>
+						</div>
+						<div class="col-md-5 col-md-offset-5">
+							<div class="action-holder">
+								<a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-file-code-o"></i> CSV</a>
+								<a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-file-excel-o"></i> Excel</a>
+								<a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-file-pdf-o"></i> PDF</a>
+								<a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-print"></i> Print</a>
+								<a href="{% url 'office:office-karyakram-budget' office.id %}" title="" class="btn btn-xs btn-success"><i class="fa fa-money"></i> Budget</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th rowspan="2">क्र. म.</th>
+								<th rowspan="2">कार्य विवरण</th>
+								<th colspan="3">वार्षिक लक्ष्य</th>
+								<th rowspan="2">थप्नुहोस</th>
+							</tr>
+							<tr>
+								<th>परिमाण</th>
+								<th>भार</th>
+								<th>बजेट</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>१.</td>
+								<td>कार्यक्रम (१)</td>
+								<td>१.</td>
+								<td>१.</td>
+								<td>१.</td>
+								<td><a href="{% url 'reports:karyakram-add' office.id %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i></a></td>
+							</tr>
+							<tr>
+								<td>१.</td>
+								<td>कार्यक्रम (१)</td>
+								<td>१.</td>
+								<td>१.</td>
+								<td>१.</td>
+								<td><a href="{% url 'reports:karyakram-add' office.id %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i></a></td>
+							</tr>
+							<tr>
+								<td>१.</td>
+								<td>कार्यक्रम (१)</td>
+								<td>१.</td>
+								<td>१.</td>
+								<td>१.</td>
+								<td><a href="{% url 'reports:karyakram-add' office.id %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i></a></td>
+							</tr>
+							<tr>
+								<td>१.</td>
+								<td>कार्यक्रम (१)</td>
+								<td>१.</td>
+								<td>१.</td>
+								<td>१.</td>
+								<td><a href="{% url 'reports:karyakram-add' office.id %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i></a></td>
+							</tr>
+							<tr>
+								<td>१.</td>
+								<td>कार्यक्रम (१)</td>
+								<td>१.</td>
+								<td>१.</td>
+								<td>१.</td>
+								<td><a href="{% url 'reports:karyakram-add' office.id %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i></a></td>
+							</tr>
+							<tr>
+								<td>१.</td>
+								<td>कार्यक्रम (१)</td>
+								<td>१.</td>
+								<td>१.</td>
+								<td>१.</td>
+								<td><a href="{% url 'reports:karyakram-add' office.id %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i></a></td>
+							</tr>
+							<tr>
+								<td>१.</td>
+								<td>कार्यक्रम (१)</td>
+								<td>१.</td>
+								<td>१.</td>
+								<td>१.</td>
+								<td><a href="{% url 'reports:karyakram-add' office.id %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i></a></td>
+							</tr>
+							<tr>
+								<td>१.</td>
+								<td>कार्यक्रम (१)</td>
+								<td>१.</td>
+								<td>१.</td>
+								<td>१.</td>
+								<td><a href="{% url 'reports:karyakram-add' office.id %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<nav aria-label="Page navigation">
+					<ul class="pagination">
+						<li>
+							<a href="#" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li>
+							<a href="#" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</section>
+		<div class="clearfix"></div>
+
+{% endblock content %}

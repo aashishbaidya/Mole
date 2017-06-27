@@ -6,16 +6,22 @@ from office.views import  OfficeAddMunicipilaty, OfficeAddProject, ProjectUpdate
 app_name = 'office'
 
 from office.views import OfficeCreateView, OfficeListView, OfficeUpdateView, OfficeDeleteView, DashboardView,\
-    OfficeAddOfficeHeadView, OfficeAddInfoofficerView, OfficeDashboard, DistrictDashboard, OfficeKaryakramList
+    OfficeAddOfficeHeadView, OfficeAddInfoofficerView, OfficeDashboard, DistrictDashboard, OfficeDetailView,OfficeUserView,\
+    OfficeKaryakram,OfficeDashboardSubmit,OfficeKaryakramBudget
 
 
 
 urlpatterns = [
 
     url(r'^office/create/$', OfficeCreateView.as_view(), name='office-add'),
+    url(r'^office/detail/(?P<pk>[0-9]+)/$', OfficeDetailView.as_view(), name='office-detail'),
+    url(r'^office/users/(?P<pk>[0-9]+)/$', OfficeUserView.as_view(), name='office-users'),
     url(r'^office/dashboard/(?P<pk>[0-9]+)/$', OfficeDashboard.as_view(), name='office-dashboard'),
+    url(r'^office/dashboard/(?P<pk>[0-9]+)/submit/$', OfficeDashboardSubmit.as_view(), name='office-dashboard-submit'),
+    url(r'^office/dashboard/(?P<pk>[0-9]+)/karyakram/$', OfficeKaryakram.as_view(), name='office-karyakram'),
+    url(r'^office/dashboard/(?P<pk>[0-9]+)/karyakram/budget/$', OfficeKaryakramBudget.as_view(), name='office-karyakram-budget'),
+
     url(r'^district/dashbaord/(?P<pk>[0-9]+)/$', DistrictDashboard.as_view(), name='district-dashboard'),
-    url(r'^office/dashboard/(?P<pk>[0-9]+)/karyakramlist/$', OfficeKaryakramList.as_view(), name='office-karyakram-list'),
     url(r'^office/update/(?P<pk>[0-9]+)/$', OfficeUpdateView.as_view(), name='office-update'),
     url(r'^office/delete/(?P<pk>[0-9]+)/$', OfficeDeleteView.as_view(), name='office-delete'),
     url(r'^office/list/$', OfficeListView.as_view(), name='office-list'),

@@ -6,141 +6,96 @@
 
 {% block content %}
 
-{% ifrole "office_head" %}
-Admin : Office Admin Name
-{% endrole %}
-
-
-{% ifrole "office_head" %}
-Information OFficer: Officer Name
-{% endrole %}
-
-
-
-
-    <section class="content">
-
-      <!-- Default box -->
-      <div class="box">
-        <div class="box-body">
-
-          <div class="office-selected">
-            <div class="col-md-6">
-              <div class="office-head-detail">
-                <div class="img-office-holder">
-                  <img src="dist/img/logo.png">
-                </div>
-                <h3 class="name-office">{{office}}</h3>
-                <p class="address-office">dadeldhura</p>
-              </div>
-              <div class="office-selected-btns">
-              <a href="#">view details</a>
-              <a href="#">users</a>
-              <a href="#">submit file</a>
-              <a href="#">program</a>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="map-office">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1059393.3436958205!2d80.50756992099542!3d29.28690855421674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39a1666b20c30d3d%3A0xb3a717378a19a012!2sFar-Western+Development+Region%2C+Nepal!5e0!3m2!1sen!2s!4v1498351003946"  width="100%" height="400px" frameborder="0" style="border:0" allowfullscreen></iframe>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="row">
-              <div class="barsik-table">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Firstname</th>
-                      <th>Lastname</th>
-                      <th>Email</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for karyakram in karyakrams %}
-                    <tr>
-                       <td>{{ karyakram.id }}. {{ karyakram.name }}
-
-                       </td>
-                       <td><a href="{% url 'office:office-update' office.id %}">test</a></td>
-                       <!-- <td>{{ karyakram.parent.all.0.id }}</td> -->
-
-                       {% for p in karyakram.parent.all %}
-                          <td>{{ p.name }}</td>
-                       {% endfor %}
-                    </tr>
-                    {% endfor %}
-                    
-                   
-                  </tbody>
-                </table>  
-              </div>
-              <div class="yearly">
-                <div class="col-md-4">
-                  <div class="yearly-4monthly text-center">
-                    <h3>yearly / 4 monthly</h3>
-                    <p>lakchya ra pragati</p>
-                  </div>
-                </div>
-                <div class="col-md-8">
-                  <div class="col-md-6">
-                    <div class="lakchya lekchya">
-                      <h3>lakchya</h3>
-                      <a href="#">pratham</a>
-                      <a href="#">dosro</a>
-                      <a href="#">tesro</a>
-                      <div class="clearfix"></div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="lakchya">
-                      <h3>pragati</h3>
-                      <a href="#">pratham</a>
-                      <a href="#">dosro</a>
-                      <a href="#">tesro</a>
-                      <div class="clearfix"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="clearfix"></div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="yearly monthly">
-                <div class="col-md-4">
-                  <div class="yearly-4monthly monthley text-center">
-                    <h3>monthly</h3>
-                    <p>lakchya ra pragati</p>
-                  </div>  
-                </div>
-                <div class="col-md-8">
-                  <div class="view-edit-t">
-                    <div class="view-edit-tc">
-                      <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> view</a>
-                      <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> edit</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="clearfix"></div>
-              </div>  
-            </div>
-          </div> 
-
-
-        </div>
-        <!-- /.box-body -->
-      </div>
-      <!-- /.box -->
-
-    </section>
+<!--Main Content Area Starts-->
+		<section id="app-section">
+			<div class="bg-white padding margin-top-lg">
+				<div class="row">
+					<div class="col-md-4 col-lg-3">
+						<!--Office Image-->
+						<div class="thumbnail">
+							<img src="{% static 'assets/images/img-office.png' %}" alt="...">
+							<div class="caption">
+								<h5>वैदेशिक रोजगार विभाग</h5>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8 col-lg-9">
+						<!--Office Map-->
+						<div id="map" style="width:100%;height:279px"></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<a href="{% url 'office:office-detail' office.id %}" title="" class="btn btn-sm btn-primary btn-block margin-top-lg">View Detail</a>
+				</div>
+				<div class="col-md-3">
+					<a href="{% url 'office:office-users' office.id %}" title="" class="btn btn-sm btn-primary btn-block margin-top-lg">Users</a>
+				</div>
+				<div class="col-md-3">
+					<a href="{% url 'office:office-dashboard-submit' office.id %}" title="" class="btn btn-sm btn-primary btn-block margin-top-lg">Submit File</a>
+				</div>
+				<div class="col-md-3">
+					<a href="{% url 'office:office-karyakram' office.id %}" title="" class="btn btn-sm btn-primary btn-block margin-top-lg">कार्यक्रम</a>
+				</div>
+			</div>
+			<ul class="different-list margin-top-lg">
+				<li>
+					<div class="table-responsive">
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th rowspan="2">वार्षिक/चौमासिक लक्ष्य र प्रगति</th>
+									<th>लक्ष्य</th>
+									<th><a href="{% url 'reports:first-control-list' office.id 0 %}" title="" class="btn btn-xs btn-primary">प्रथम</a></th>
+									<th><a href="" title="" class="btn btn-xs btn-primary">चौमासिक</a></th>
+									<th><a href="#" title="" class="btn btn-xs btn-primary">वार्षिक</a></th>
+								</tr>
+								<tr>
+									<th>प्रगति</th>
+									<th><a href="l-second.php" title="" class="btn btn-xs btn-primary">प्रथम</a></th>
+									<th><a href="#" title="" class="btn btn-xs btn-primary">चौमासिक</a></th>
+									<th><a href="#" title="" class="btn btn-xs btn-primary">वार्षिक</a></th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</li>
+				<li>
+					<div class="table-responsive">
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>मासिक लक्ष्य र प्रगति</th>
+									<th><a href="#" title="" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i> View</a></th>
+									<th><a href="#" title="" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a></th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</li>
+			</ul>
+		</section>
+		<div class="clearfix"></div>
+		<!--Main Content Area Ends-->
 
 {% endblock content %}
 
 
+		{% block extra_scripts %}
+            <script>
+                function myMap() {
+                    var myCenter = new google.maps.LatLng(51.508742,-0.120850);
+                    var mapCanvas = document.getElementById("map");
+                    var mapOptions = {center: myCenter, zoom: 5};
+                    var map = new google.maps.Map(mapCanvas, mapOptions);
+                    var marker = new google.maps.Marker({position:myCenter});
+                    marker.setMap(map);
+                }
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDmkU1cjj2GkxzKoYWZV987q0sIGCL3Ps&callback=myMap"></script>
+
+        {% endblock extra_scripts %}
 
 
 
-
-
-{% block extra_script %}
-{% endblock extra_script %}

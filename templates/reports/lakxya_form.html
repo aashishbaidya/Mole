@@ -1,13 +1,45 @@
-<form class = "" action="" method="post" enctype="multipart/form-data">
-	{% csrf_token %}
-	{% include 'reports/form_template.html' %}
-	<div class="form-group">
-		<div class="col-sm-offset-2 col-sm-10">
-			<button type="submit" class="btn btn-success">Submit</button>
-		</div>
-	</div>
-	{% if form.instance.id %}
-		<input type="hidden" name="lakxya", value="{{form.instance.id}}">
-	{% endif %}
+{% extends "base_layout.html" %}
+{% load staticfiles %}
+{% load filters %}
 
-</form>
+{% block title %}Karyakrams{% endblock title %}
+
+{% block content %}
+
+<!--Main Content Area Starts-->
+		<section id="app-section">
+			<ol class="breadcrumb no-margin margin-top-lg">
+			  <li><a href="index.php">गृह पृष्ठ</a></li>
+			  <li><a href="page-office.php">वैदेशिक रोजगार विभाग</a></li>
+			  <li><a href="l-second.php">वार्षिक/ चौमासिक लक्ष्य</a></li>
+			  <li class="active">Edit</li>
+			</ol>
+			<div class="bg-white padding margin-top-lg">
+				<div class="app-page-header">
+					<h4>पहिलो चौमासिक लक्ष्य</h4>
+
+				</div>
+				<form>
+					<div class="form-group">
+						<label>कार्यक्रम (१.)</label>
+					</div>
+					<div class="form-group">
+						<label for="input1">परिमाण</label>
+						<input type="text" class="form-control" id="input1">
+					</div>
+					<div class="form-group">
+						<label for="input2">भार</label>
+						<input type="text" class="form-control" id="input2">
+					</div>
+					<div class="form-group">
+						<label for="input3">लागत</label>
+						<input type="text" class="form-control" id="input3">
+					</div>
+					<button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i> Update</button>
+				</form>
+			</div>
+		</section>
+		<div class="clearfix"></div>
+		<!--Main Content Area Ends-->
+
+{% endblock content %}

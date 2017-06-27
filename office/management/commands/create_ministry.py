@@ -8,7 +8,7 @@ class Command(BaseCommand):
     help = 'Create default Ministry'
 
     def handle(self, *args, **options):
-        Ministry_list = ['दर्चुला ', 'कंचनपुर', 'डडेलधुरा', 'कैलाली ','बझाङ ','बैतडी','डोटी ','अछाम','बाजुरा']
+        Ministry_list = ['ministry1 ', 'ministry2', ]
         for ministry in Ministry_list:
             new_ministry, created = Ministry.objects.get_or_create(name=ministry)
             if created:
