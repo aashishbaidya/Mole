@@ -30,7 +30,8 @@ class PragatiView(object):
 
 
 class KaryakramCreateView(OfficeView, KaryakramView, CreateView):
-    def form_valid(self, form):
+
+      def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.office = Office(pk=self.kwargs.get('office'))
         self.object.save()

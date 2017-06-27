@@ -50,12 +50,13 @@ class OfficeUserView(LoginRequiredMixin, TemplateView):
         context = super(OfficeUserView, self).get_context_data(**kwargs)
 
         context['office'] = kwargs.get('pk')
-        context['head'] = UserRole.get_office_user('Office Head', kwargs.get('pk'))
-        context['assistant'] = UserRole.get_office_user('Information Officer', kwargs.get('pk'))
+        #context['head'] = UserRole.get_office_user('Office Head', kwargs.get('pk'))
+        # context['assistant'] = UserRole.get_office_user('Information Officer', kwargs.get('pk'))
         return context
 
 class OfficeKaryakram(LoginRequiredMixin, OfficeView, DetailView):
     template_name = 'reports/karyakram.html'
+
 
 class OfficeKaryakramBudget(LoginRequiredMixin, OfficeView, DetailView):
     template_name = 'reports/karyakram_budget.html'
@@ -231,6 +232,12 @@ class OfficeDashboard(LoginRequiredMixin, TemplateView):
 class OfficeDashboardSubmit(LoginRequiredMixin, TemplateView):
 
     template_name = "office/office_dashboard_submit.html"
+    def get_context_data(self, **kwargs):
+        context = super(OfficeDashboardSubmit, self).get_context_data(**kwargs)
+        office = Office.objects.get(pk=kwargs.get('pk'))
+
+        context['office'] = office
+        return context
 
 
 class DistrictDashboard(LoginRequiredMixin, TemplateView):

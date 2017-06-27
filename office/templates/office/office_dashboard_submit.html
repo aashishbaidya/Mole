@@ -2,15 +2,15 @@
 {% load staticfiles %}
 {% load filters %}
 
-{% block title %}{{office}}{% endblock title %}
+{% block title %}{% endblock title %}
 
 {% block content %}
 
 		<!--Main Content Area Starts-->
 		<section id="app-section">
 			<ol class="breadcrumb no-margin margin-top-lg">
-			  <li><a href="index.php">गृह पृष्ठ</a></li>
-			  <li><a href="page-office.php">वैदेशिक रोजगार विभाग</a></li>
+			  <li><a href="{% url 'office:dashboard' %}">गृह पृष्ठ</a></li>
+			  <li><a href="{% url 'office:office-dashboard' office.id %}">वैदेशिक रोजगार विभाग</a></li>
 			  <li class="active">Submit File</li>
 			</ol>
 			<div class="bg-white padding margin-top-lg">
@@ -49,7 +49,7 @@
 									</tr>
 								</tbody>
 							</table>
-						</div>
+				</div>
 						<nav aria-label="Page navigation">
 						  <ul class="pagination">
 							<li>
