@@ -8,9 +8,9 @@ class Command(BaseCommand):
     help = 'Create default Department'
 
     def handle(self, *args, **options):
-        ministry1, created = Ministry.objects.get_or_create(name="test")
+        ministry1, created = Ministry.objects.get_or_create(name="ministry1")
         
-        department_list = ['दर्चुला ', 'कंचनपुर', 'डडेलधुरा', 'कैलाली ','बझाङ ','बैतडी','डोटी ','अछाम','बाजुरा']
+        department_list = ['department1 ']
         for department in department_list:
             new_department, created = Department.objects.get_or_create(name=department, ministry=ministry1)
             if created:

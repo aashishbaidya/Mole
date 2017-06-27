@@ -3,14 +3,14 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, DetailView
 from django.shortcuts import render, get_object_or_404
 
 from reports.models import KaryaKram
 from .models import Office, ProjectDetail, MunicipalityDetail, District
 from .forms import OfficeForm, UserForm, MunicipalityDetailForm, ProjectDetailForm, OfficeEditForm
 
-from userrole.mixins import CreateView, UpdateView, DeleteView, OfficerMixin, AdminAssistantMixin, AdminAssistantMixin, OfficeHeadMixin
+from userrole.mixins import CreateView, UpdateView, DeleteView, OfficerMixin, AdminAssistantMixin
 
 from django.views.generic import View
 from django.shortcuts import render, redirect
@@ -26,8 +26,6 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from django.core.urlresolvers import reverse
-
-from django.contrib.auth.models import User,Group
 from userrole.models import UserRole
 
 class OfficeView(object):
@@ -44,6 +42,27 @@ class MunicipalityView(object):
     model = MunicipalityDetail
     success_url = reverse_lazy('office:office-list')
     form_class = MunicipalityDetailForm
+
+class OfficeUserView(LoginRequiredMixin, TemplateView):
+    template_name = 'office/users.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(OfficeUserView, self).get_context_data(**kwargs)
+
+        context['office'] = kwargs.get('pk')
+        context['head'] = UserRole.get_office_user('Office Head', kwargs.get('pk'))
+        context['assistant'] = UserRole.get_office_user('Information Officer', kwargs.get('pk'))
+        return context
+
+class OfficeKaryakram(LoginRequiredMixin, OfficeView, DetailView):
+    template_name = 'reports/karyakram.html'
+
+class OfficeKaryakramBudget(LoginRequiredMixin, OfficeView, DetailView):
+    template_name = 'reports/karyakram_budget.html'
+
+
+class OfficeDetailView(LoginRequiredMixin, OfficeView, DetailView):
+    pass
 
 
 class OfficeListView(LoginRequiredMixin, AdminAssistantMixin, OfficeView, ListView):
@@ -133,9 +152,8 @@ class OfficeAddOfficeHeadView(LoginRequiredMixin, AdminAssistantMixin, OfficeVie
             user.profile.office = Office.objects.get(id=request.POST.get('office'))
             user.save()
 
-           
-            office_head = Group.objects.get(name="Office Head")
-            role, created = UserRole.objects.get_or_create(user=user, group=office_head, office = Office.objects.get(id=request.POST.get('office')))
+            grp = Group.objects.get(name=role)
+            grp.user_set.add(user)
 
             #email sending part
             current_site = get_current_site(request)
@@ -149,7 +167,7 @@ class OfficeAddOfficeHeadView(LoginRequiredMixin, AdminAssistantMixin, OfficeVie
             user.email_user(subject, message)
             return redirect('office:office-dashboard', pk=office)
 
-class OfficeAddInfoofficerView(LoginRequiredMixin, OfficeHeadMixin, OfficeView, View):
+class OfficeAddInfoofficerView(LoginRequiredMixin, AdminAssistantMixin, OfficeView, View):
     def get(self, request, pk):
         user = UserForm()
         return render(request, 'office/addnewuser.html', {'form': user, 'office_id': pk, 'role':'Information Officer'})
@@ -166,9 +184,8 @@ class OfficeAddInfoofficerView(LoginRequiredMixin, OfficeHeadMixin, OfficeView, 
             user.profile.office = Office.objects.get(id=request.POST.get('office'))
             user.save()
 
-            information_officer = Group.objects.get(name="Information Officer")
-            role, created = UserRole.objects.get_or_create(user=user, group=information_officer, office = Office.objects.get(id=request.POST.get('office')))
-
+            grp = Group.objects.get(name=role)
+            grp.user_set.add(user)
 
             #email sending part
             current_site = get_current_site(request)
@@ -187,16 +204,9 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 
     template_name = "office/dashboard.html"
 
-    def dispatch(self, request, *args, **kwargs):
-        
-        if request.office:
-
-            return redirect('office:office-dashboard', pk=request.office.id)
-        return super(DashboardView, self).dispatch(request, *args, **kwargs)
-
     def get_context_data(self, **kwargs):
         context = super(DashboardView, self).get_context_data(**kwargs)
-        context['districts'] = District.objects.all()
+        context['offices'] = Office.objects.all()
         context['projects'] = Office.objects.filter(is_project=True)
         context['submission_count'] = 0
         context['offices_count'] = Office.objects.all().count()
@@ -212,20 +222,15 @@ class OfficeDashboard(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(OfficeDashboard, self).get_context_data(**kwargs)
         office = Office.objects.get(pk=kwargs.get('pk'))
-        context['office'] = office
-        context['karyakrams'] = KaryaKram.objects.filter(office__id=kwargs.get("pk"), karyakram__isnull=True).prefetch_related("parent")
-        return context
-
-class OfficeKaryakramList(LoginRequiredMixin, TemplateView):
-
-    template_name = "office/office_karyakram_list.html"
-    def get_context_data(self, **kwargs):
-        context = super(OfficeKaryakramList, self).get_context_data(**kwargs)
-        office = Office.objects.get(pk=kwargs.get('pk'))
 
         context['office'] = office
         context['karyakrams'] = KaryaKram.objects.filter(office=office)
         return context
+
+
+class OfficeDashboardSubmit(LoginRequiredMixin, TemplateView):
+
+    template_name = "office/office_dashboard_submit.html"
 
 
 class DistrictDashboard(LoginRequiredMixin, TemplateView):
@@ -237,6 +242,5 @@ class DistrictDashboard(LoginRequiredMixin, TemplateView):
         district = District.objects.get(pk=kwargs.get('pk'))
 
         context['district'] = district
-        context['projects'] = Office.objects.filter(district=district, is_project=True)
-        context['municipalitys'] = Office.objects.filter(district=district, is_municipality=True)
+        context['offices'] = Office.objects.filter(district=district)
         return context

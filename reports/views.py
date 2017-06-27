@@ -12,6 +12,8 @@ from reports.forms import KaryakramForm, LakxyaForm, PragatiForm
 from reports.models import KaryaKram, Lakxya, Pragati
 from userrole.mixins import CreateView, UpdateView, OfficeView, OfficerMixin
 from django.core.urlresolvers import reverse
+from django.db.models import Prefetch
+
 
 class KaryakramView(object):
     model = KaryaKram
@@ -114,3 +116,33 @@ class ReportView(OfficeView, OfficerMixin, KaryakramView, ListView):
         qs =  KaryaKram.objects.filter(office__id=self.kwargs.get("office"), lakxya__awadhi=0, pragati__awadhi=1).\
             prefetch_related("lakxya", "pragati")
         return qs
+
+
+class KaryakramControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
+    template_name = 'reports/karyakram_control.html'
+
+    def get_context_data(self, **kwargs):
+        data = super(KaryakramControlList, self).get_context_data(**kwargs)
+        data['office'] = self.kwargs.get('office')
+        data['awadhi'] = self.kwargs.get('awadhi')
+        return data
+
+    def get_queryset(self):
+        qs = KaryaKram.objects.filter(office__id=self.kwargs.get("office"), karyakram__isnull=True).prefetch_related(Prefetch("parent", to_attr='childs'))
+
+        return qs
+
+class FirstControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
+        template_name = 'reports/First_control.html'
+
+        def get_context_data(self, **kwargs):
+            data = super(FirstControlList, self).get_context_data(**kwargs)
+            data['office'] = self.kwargs.get('office')
+            data['type'] = self.kwargs.get('type')
+            return data
+
+        def get_queryset(self):
+            qs = KaryaKram.objects.filter(office__id=self.kwargs.get("office"),
+                                          karyakram__isnull=True).prefetch_related(Prefetch("parent", to_attr='childs'))
+
+            return qs
