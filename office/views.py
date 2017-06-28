@@ -58,10 +58,6 @@ class OfficeKaryakram(LoginRequiredMixin, OfficeView, DetailView):
     template_name = 'reports/karyakram.html'
 
 
-class OfficeKaryakramBudget(LoginRequiredMixin, OfficeView, DetailView):
-    template_name = 'reports/karyakram_budget.html'
-
-
 class OfficeDetailView(LoginRequiredMixin, OfficeView, DetailView):
     pass
 
