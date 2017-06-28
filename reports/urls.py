@@ -2,7 +2,7 @@ from django.conf.urls import url
 
 
 from .views import KaryakramCreateView, KaryakramUpdateView, LakxyaCreateView, PragatiCreateView, KaryakramListView, \
-    ReportView,KaryakramControlList,FirstControlList,FirstControlListEdit,SecondControlList
+    ReportView,KaryakramControlList,FirstControlList,FirstControlListEdit,SecondControlList,SecondControlListEdit
 
 app_name = 'reports'
 
@@ -17,6 +17,8 @@ urlpatterns = [
         name='first-control-list-edit'),
     url(r'^karyakram/secondcontrollist/(?P<office>[0-9]+)/(?P<type>[0-9]+)/$', SecondControlList.as_view(),
         name='second-control-list'),
+    url(r'^karyakram/secondcontrollist/(?P<office>[0-9]+)/(?P<type>[0-9]+)/edit/$', SecondControlListEdit.as_view(),
+        name='second-control-list-edit'),
 
     url(r'^karyakram/create/(?P<office>[0-9]+)/$', KaryakramCreateView.as_view(), name='karyakram-add'),
     url(r'^list/(?P<office>[0-9]+)/(?P<awadhi>[0-9]+)/$', ReportView.as_view(), name='reports'),

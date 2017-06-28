@@ -145,3 +145,7 @@ class FirstControlListEdit(OfficeView, OfficerMixin, KaryakramView, UpdateView):
 class SecondControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
     template_name = 'reports/second_control.html'
 
+
+class SecondControlListEdit(OfficeView, OfficerMixin, KaryakramView, UpdateView):
+    template_name = 'reports/second_control_edit.html'
+
