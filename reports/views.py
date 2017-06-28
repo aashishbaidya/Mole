@@ -31,12 +31,16 @@ class PragatiView(object):
 
 class KaryakramCreateView(OfficeView, KaryakramView, CreateView):
 
-      def form_valid(self, form):
+    def get(self, request, *args, **kwargs):
+        office = self.kwargs['office']
+        return render(request, 'reports/karyakram_form.html', {'office': office},)
+
+
+    def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.office = Office(pk=self.kwargs.get('office'))
         self.object.save()
         return redirect(reverse('reports:add-laksya',args=(self.object.office.id, self.object.id, 0)))
-
 
 class KaryakramUpdateView(OfficeView, KaryakramView, UpdateView):
     pass
@@ -133,11 +137,34 @@ class KaryakramControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
         return qs
 
 class FirstControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
-        template_name = 'reports/First_control.html'
+
+    def get(self, request, *args, **kwargs):
+        office = self.kwargs['office']
+        return render(request, 'reports/First_control.html', {'office': office}, )
 
 
 class SecondControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
-    template_name = 'reports/second_control.html'
+    def get(self, request, *args, **kwargs):
+        office = self.kwargs['office']
+        return render(request, 'reports/second_control.html', {'office': office}, )
+
+#only for design implementation
+class FirstControlListEdit(OfficeView, OfficerMixin, KaryakramView, ListView):
+    def get(self, request, *args, **kwargs):
+        office = self.kwargs['office']
+        return render(request, 'reports/first_controllist_edit.html', {'office': office}, )
+
+
+class SecondControlListEdit(OfficeView, OfficerMixin, KaryakramView, ListView):
+    def get(self, request, *args, **kwargs):
+        office = self.kwargs['office']
+        return render(request, 'reports/second_controllist_edit.html', {'office': office}, )
+
+
+class SecondControlListBudget(OfficeView, OfficerMixin, KaryakramView, ListView):
+    def get(self, request, *args, **kwargs):
+        office = self.kwargs['office']
+        return render(request, 'reports/budget.html', {'office': office}, )
 
 
 class SecondControlListEdit(OfficeView, OfficerMixin, KaryakramView, UpdateView):

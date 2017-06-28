@@ -8,8 +8,8 @@
 <!--Main Content Area Starts-->
 		<section id="app-section">
 			<ol class="breadcrumb no-margin margin-top-lg">
-			  <li><a href="index.php">गृह पृष्ठ</a></li>
-			  <li><a href="page-office.php">वैदेशिक रोजगार विभाग</a></li>
+			  <li><a href="{% url 'office:dashboard' %}">गृह पृष्ठ</a></li>
+			  <li><a href="{% url 'office:office-dashboard' office %}">वैदेशिक रोजगार विभाग</a></li>
 			  <li class="active">वार्षिक/ चौमासिक लक्ष्य</li>
 			</ol>
 			<div class="bg-white padding margin-top-lg">
@@ -33,7 +33,7 @@
 								<a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-file-excel-o"></i> Excel</a>
 								<a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-file-pdf-o"></i> PDF</a>
 								<a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-print"></i> Print</a>
-								<a href="#" title="" class="btn btn-xs btn-success"><i class="fa fa-money"></i> Budget</a>
+								<a href="{% url 'reports:second-control-list-budget' office %}" title="" class="btn btn-xs btn-success"><i class="fa fa-money"></i> Budget</a>
 							</div>
 						</div>
 					</div>
@@ -72,7 +72,8 @@
 								<td>१.</td>
 								<td>१.</td>
 								<td>१.</td>
-								<td><a href="" title="" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a></td>
+
+								<td><a href="{% url 'reports:second-control-list-edit' office %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a></td>
 							</tr>
 
 						</tbody>

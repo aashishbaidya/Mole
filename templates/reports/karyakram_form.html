@@ -10,9 +10,10 @@
 		<section id="app-section">
 			<ol class="breadcrumb no-margin margin-top-lg">
 			  <li><a href="{% url 'office:dashboard' %}">गृह पृष्ठ</a></li>
-			  <li><a href="">वैदेशिक रोजगार विभाग</a></li>
-			  <li><a href="">कार्यक्रम</a></li>
+			  <li><a href="{% url 'office:office-dashboard' office %}">वैदेशिक रोजगार विभाग</a></li>
+			  <li><a href="{% url 'office:office-karyakram' office %}">कार्यक्रम</a></li>
 			  <li class="active">Add</li>
+
 			</ol>
 			<div class="bg-white padding margin-top-lg">
 				<div class="app-page-header">

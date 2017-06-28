@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'userrole.apps.UserRoleConfig',
     'reports.apps.ReportsConfig',
+    # 'debug_toolbar',
+
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -52,6 +54,8 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'userrole.middleware.RoleMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+
 ]
 
 ROOT_URLCONF = 'mole.urls'
@@ -143,6 +147,7 @@ LOGIN_URL = '/users/login/'
 
 LOGIN_REDIRECT_URL = '/'
 
+# INTERNAL_IPS = '127.0.0.1'
 
 try:
     from local_settings import *

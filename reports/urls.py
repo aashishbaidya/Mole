@@ -2,7 +2,8 @@ from django.conf.urls import url
 
 
 from .views import KaryakramCreateView, KaryakramUpdateView, LakxyaCreateView, PragatiCreateView, KaryakramListView, \
- ReportView,KaryakramControlList,FirstControlList,SecondControlList
+    ReportView,KaryakramControlList,FirstControlList,SecondControlList,FirstControlListEdit,SecondControlListEdit,\
+    SecondControlListBudget
 
 app_name = 'reports'
 
@@ -20,6 +21,15 @@ urlpatterns = [
     url(r'^karyakram/update/(?P<office>[0-9]+)/(?P<pk>[0-9]+)/$', KaryakramUpdateView.as_view(), name='karyakram-update'),
     url(r'^karyakram/addlaksya/(?P<office>[0-9]+)/(?P<karyakram_id>[0-9]+)/(?P<awadhi>[0-9]+)/$', LakxyaCreateView.as_view(), name='add-laksya'),
     url(r'^karyakram/addpragati/(?P<office>[0-9]+)/(?P<karyakram_id>[0-9]+)/(?P<awadhi>[0-9]+)/$', PragatiCreateView.as_view(), name='add-pragati'),
+
+    #only for design implementation
+    url(r'^karyakram/firstcontrollist/(?P<office>[0-9]+)/edit$', FirstControlListEdit.as_view(),
+        name='first-control-list-edit'),
+    url(r'^karyakram/secondcontrollist/(?P<office>[0-9]+)/edit/$', SecondControlListEdit.as_view(),
+        name='second-control-list-edit'),
+    url(r'^karyakram/secondcontrollist/(?P<office>[0-9]+)/budget$', SecondControlListBudget.as_view(),
+        name='second-control-list-budget'),
+
         ]
 
 
