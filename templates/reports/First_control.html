@@ -8,8 +8,8 @@
 <!--Main Content Area Starts-->
 		<section id="app-section">
 			<ol class="breadcrumb no-margin margin-top-lg">
-			  <li><a href="index.php">गृह पृष्ठ</a></li>
-			  <li><a href="page-office.php">वैदेशिक रोजगार विभाग</a></li>
+			  <li><a href="{% url 'office:dashboard' %}">गृह पृष्ठ</a></li>
+			  <li><a href="{% url 'office:office-dashboard' office %}">वैदेशिक रोजगार विभाग</a></li>
 			  <li class="active">वार्षिक/ चौमासिक लक्ष्य</li>
 			</ol>
 			<div class="bg-white padding margin-top-lg">
@@ -58,7 +58,7 @@
 								<td></td>
 								<td></td>
 								<td></td>
-								<td><a href="" title="" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a></td>
+								<td><a href="{% url 'reports:first-control-list-edit' office %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a></td>
 							</tr>
 							<tr>
 								<td>१.</td>
@@ -69,7 +69,7 @@
 								<td></td>
 								<td></td>
 								<td></td>
-								<td><a href="l-first-edit.ph" title="" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a></td>
+								<td><a href="{% url 'reports:first-control-list-edit' office %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a></td>
 							</tr>
 							<tr>
 								<td>१.</td>

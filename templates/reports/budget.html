@@ -1,0 +1,97 @@
+{% extends "base_layout.html" %}
+{% load staticfiles %}
+{% load filters %}
+
+{% block title %}Karyakrams{% endblock title %}
+
+{% block content %}
+
+
+		<!--Main Content Area Starts-->
+		<section id="app-section">
+			<ol class="breadcrumb no-margin margin-top-lg">
+			  <li><a href="{% url 'office:dashboard' %}">गृह पृष्ठ</a></li>
+			  <li><a href="{% url 'office:office-dashboard' office %}">वैदेशिक रोजगार विभाग</a></li>
+			  <li><a href="{% url 'reports:second-control-list' office 1 %}">वार्षिक/ चौमासिक लक्ष्य</a></li>
+			  <li class="active">बजेट</li>
+			</ol>
+			<div class="bg-white padding margin-top-lg">
+				<div class="app-page-header">
+					<h4>बजेट थप्नुहोस</h4>
+				</div>
+				<form>
+					<div class="form-group">
+						<label for="input1">१. बजेट शिर्षक न. </label>
+						<input type="text" class="form-control" id="input1">
+					</div>
+					<div class="form-group">
+						<label for="input2">२. यस अवधिको बजेट रु</label>
+						<input type="text" class="form-control" id="input2">
+					</div>
+					<hr>
+					<div class="form-group">
+						<label>क. आन्तरिक</label>
+					</div>
+					<div class="form-group">
+						<label for="input3">i. नेपाल सरकार</label>
+						<input type="text" class="form-control" id="input3">
+					</div>
+					<div class="form-group">
+						<label for="input4">ii. संस्था</label>
+						<input type="text" class="form-control" id="input4">
+					</div>
+					<div class="form-group">
+						<label for="input5">iii. जन सहभागिता</label>
+						<input type="text" class="form-control" id="input5">
+					</div>
+					<hr>
+					<div class="form-group">
+						<label>ख. वैदेसिक</label>
+					</div>
+					<div class="form-group">
+						<label for="input6">i. ऋण</label>
+						<input type="text" class="form-control" id="input6">
+					</div>
+					<div class="form-group">
+						<label for="input7">ii. अनुदान</label>
+						<input type="text" class="form-control" id="input7">
+					</div>
+					<hr>
+					<div class="form-group">
+						<label for="input8">ग. दार्ति संस्था</label>
+						<input type="text" class="form-control" id="input8">
+					</div>
+					<hr>
+					<div class="form-group">
+						<label>३. यस अवधिको खर्च रु</label>
+					</div>
+					<div class="form-group">
+						<label for="input9">i. आन्तरिक</label>
+						<input type="text" class="form-control" id="input9">
+					</div>
+					<div class="form-group">
+						<label for="input10">ii. वैदेशिक</label>
+						<input type="text" class="form-control" id="input10">
+					</div>
+					<hr>
+					<div class="form-group">
+						<label for="input11">४. चौमासिक बजेटको खर्च प्रतिसत</label>
+						<input type="text" class="form-control" id="input11">
+					</div>
+					<div class="form-group">
+						<label for="input12">५. सुरु देखि यस अवधिसम्मको कुल खर्च(कुल लागतको तुलनामा)</label>
+						<input type="text" class="form-control" id="input12">
+					</div>
+					<div class="form-group">
+						<label for="input13">६. बितेको समय प्रतिसतमा (कुल अवधिको तुलनामा)</label>
+						<input type="text" class="form-control" id="input13">
+					</div>
+					<button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-save"></i> Save</button>
+				</form>
+			</div>
+		</section>
+		<div class="clearfix"></div>
+		<!--Main Content Area Ends-->
+
+
+{% endblock content %}
