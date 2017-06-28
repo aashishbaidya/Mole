@@ -15,9 +15,6 @@ urlpatterns = [
         name='first-control-list'),
     url(r'^karyakram/secondcontrollist/(?P<office>[0-9]+)/(?P<type>[0-9]+)/$', SecondControlList.as_view(),
         name='second-control-list'),
-    url(r'^karyakram/secondcontrollist/(?P<office>[0-9]+)/(?P<type>[0-9]+)/edit/$', SecondControlListEdit.as_view(),
-        name='second-control-list-edit'),
-
     url(r'^karyakram/create/(?P<office>[0-9]+)/$', KaryakramCreateView.as_view(), name='karyakram-add'),
     url(r'^list/(?P<office>[0-9]+)/(?P<awadhi>[0-9]+)/$', ReportView.as_view(), name='reports'),
     url(r'^karyakram/update/(?P<office>[0-9]+)/(?P<pk>[0-9]+)/$', KaryakramUpdateView.as_view(), name='karyakram-update'),
