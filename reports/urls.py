@@ -22,3 +22,5 @@ urlpatterns = [
     url(r'^karyakram/addlaksya/(?P<office>[0-9]+)/(?P<karyakram_id>[0-9]+)/(?P<awadhi>[0-9]+)/$', LakxyaCreateView.as_view(), name='add-laksya'),
     url(r'^karyakram/addpragati/(?P<office>[0-9]+)/(?P<karyakram_id>[0-9]+)/(?P<awadhi>[0-9]+)/$', PragatiCreateView.as_view(), name='add-pragati'),
         ]
+
+
