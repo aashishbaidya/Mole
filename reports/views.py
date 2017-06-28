@@ -136,14 +136,12 @@ class KaryakramControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
 class FirstControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
         template_name = 'reports/First_control.html'
 
-        def get_context_data(self, **kwargs):
-            data = super(FirstControlList, self).get_context_data(**kwargs)
-            data['office'] = self.kwargs.get('office')
-            data['type'] = self.kwargs.get('type')
-            return data
 
-        def get_queryset(self):
-            qs = KaryaKram.objects.filter(office__id=self.kwargs.get("office"),
-                                          karyakram__isnull=True).prefetch_related(Prefetch("parent", to_attr='childs'))
 
-            return qs
+class FirstControlListEdit(OfficeView, OfficerMixin, KaryakramView, UpdateView):
+        template_name = 'reports/first_control_edit.html'
+
+
+class SecondControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
+    template_name = 'reports/second_control.html'
+
