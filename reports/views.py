@@ -38,7 +38,6 @@ class KaryakramCreateView(OfficeView, KaryakramView, CreateView):
         return redirect(reverse('reports:add-laksya',args=(self.object.office.id, self.object.id, 0)))
 
 
-
 class KaryakramUpdateView(OfficeView, KaryakramView, UpdateView):
     pass
 
@@ -135,11 +134,6 @@ class KaryakramControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
 
 class FirstControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
         template_name = 'reports/First_control.html'
-
-
-
-class FirstControlListEdit(OfficeView, OfficerMixin, KaryakramView, UpdateView):
-        template_name = 'reports/first_control_edit.html'
 
 
 class SecondControlList(OfficeView, OfficerMixin, KaryakramView, ListView):
