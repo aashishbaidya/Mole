@@ -166,7 +166,3 @@ class SecondControlListBudget(OfficeView, OfficerMixin, KaryakramView, ListView)
         office = self.kwargs['office']
         return render(request, 'reports/budget.html', {'office': office}, )
 
-
-class SecondControlListEdit(OfficeView, OfficerMixin, KaryakramView, UpdateView):
-    template_name = 'reports/second_control_edit.html'
-
