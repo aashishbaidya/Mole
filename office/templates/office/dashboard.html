@@ -39,6 +39,83 @@
 					</div>
 				</div>
 			</div>
+			<div class="bg-white padding margin-top-lg">
+				<div class="app-page-header">
+					<div class="row">
+						<div class="col-md-2">
+							<select class="form-control input-sm">
+							  <option>10</option>
+							  <option>20</option>
+							  <option>30</option>
+							  <option>40</option>
+							  <option>50</option>
+							</select>
+						</div>
+						<div class="col-md-5 col-md-offset-5">
+							<div class="action-holder">
+								<a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-file-code-o"></i> CSV</a>
+								<a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-file-excel-o"></i> Excel</a>
+								<a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-file-pdf-o"></i> PDF</a>
+								<a href="#" title="" class="btn btn-xs btn-default"><i class="fa fa-print"></i> Print</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th rowspan="2">सि. न.</th>
+								<th rowspan="2">कार्यलय</th>
+								<th colspan="6">फारम बुझाएको मिति</th>
+							</tr>
+							<tr>
+								<th>वार्षिक चौमासिक प्रगति</th>
+								<th>मासिक प्रगति</th>
+								<th>सचिव वैठक प्रगति</th>
+								<th>कार्य सम्पादन सूचक</th>
+								<th>वजेट वक्तव्य</th>
+								<th>पुरा हेर्नुहोस</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for office in offices %}
+
+							<tr>
+								<td>१.</td>
+								<td>{{office}}</td>
+								<td>२०७३/५/२</td>
+								<td>२०७३/५/८</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td><a href="{% url 'office:view-data-detail' office.id %}" title="" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a></td>
+							</tr>
+						{% endfor %}
+
+						</tbody>
+					</table>
+				</div>
+				<nav aria-label="Page navigation">
+					<ul class="pagination">
+						<li>
+							<a href="#" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li>
+							<a href="#" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
 			<div class="row">
 				<div class="col-md-8">
 					<!--Map-->
@@ -76,6 +153,7 @@
 		</section>
 		<div class="clearfix"></div>
 		<!--Main Content Area Ends-->
+
 {% endblock content %}
 
 

@@ -61,6 +61,9 @@ class OfficeKaryakram(LoginRequiredMixin, OfficeView, DetailView):
 class OfficeDetailView(LoginRequiredMixin, OfficeView, DetailView):
     pass
 
+class OfficeViewDataDetailView(LoginRequiredMixin, OfficeView, DetailView):
+    template_name = 'office/view_data.html'
+
 
 class OfficeListView(LoginRequiredMixin, AdminAssistantMixin, OfficeView, ListView):
     context_object_name = 'all_offices'

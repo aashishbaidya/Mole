@@ -7,7 +7,7 @@ app_name = 'office'
 
 from office.views import OfficeCreateView, OfficeListView, OfficeUpdateView, OfficeDeleteView, DashboardView,\
     OfficeAddOfficeHeadView, OfficeAddInfoofficerView, OfficeDashboard, DistrictDashboard, OfficeDetailView,OfficeUserView,\
-    OfficeKaryakram,OfficeDashboardSubmit
+    OfficeKaryakram,OfficeDashboardSubmit,OfficeViewDataDetailView
 
 
 
@@ -15,6 +15,7 @@ urlpatterns = [
 
     url(r'^office/create/$', OfficeCreateView.as_view(), name='office-add'),
     url(r'^office/detail/(?P<pk>[0-9]+)/$', OfficeDetailView.as_view(), name='office-detail'),
+    url(r'^office/view-data-detail/(?P<pk>[0-9]+)/$', OfficeViewDataDetailView.as_view(), name='view-data-detail'),
     url(r'^office/users/(?P<pk>[0-9]+)/$', OfficeUserView.as_view(), name='office-users'),
     url(r'^office/dashboard/(?P<pk>[0-9]+)/$', OfficeDashboard.as_view(), name='office-dashboard'),
     url(r'^office/dashboard/(?P<pk>[0-9]+)/submit/$', OfficeDashboardSubmit.as_view(), name='office-dashboard-submit'),
