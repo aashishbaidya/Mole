@@ -1,8 +1,6 @@
 from django.conf.urls import url
 
 
-from office.views import  OfficeAddMunicipilaty, OfficeAddProject, ProjectUpdate, MunicipalityUpdate
-
 app_name = 'office'
 
 from office.views import OfficeCreateView, OfficeListView, OfficeUpdateView, OfficeDeleteView, DashboardView,\
@@ -28,10 +26,6 @@ urlpatterns = [
     url(r'^office/(?P<pk>[0-9]+)/adduser/addofficehead/$', OfficeAddOfficeHeadView.as_view(), name='office-add-office-head'),
     url(r'^office/(?P<pk>[0-9]+)/adduser/addinfoofficer/$', OfficeAddInfoofficerView.as_view(), name='office-add-info-officer'),
     #url(r'^office/(?P<pk>[0-9]+)/addtype/$', OfficeAddUserView.as_view(), name='office-addtype'),
-    url(r'^office/(?P<pk>[0-9]+)/addmunicipality/$', OfficeAddMunicipilaty.as_view(), name='office-add-municipilaty'),
-    url(r'^office/(?P<pk>[0-9]+)/addproject/$', OfficeAddProject.as_view(), name='office-add-project'),
-    url(r'^office/(?P<pk>[0-9]+)/updateproject/$', ProjectUpdate.as_view(), name='office-update-project'),
-    url(r'^office/(?P<pk>[0-9]+)/updatemunicipality/$', MunicipalityUpdate.as_view(), name='office-update-municipality'),
     url(r'', DashboardView.as_view(), name='dashboard'),
 
         ]

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from models import Office, ProjectDetail, MunicipalityDetail
+from models import Office
 from django.contrib.auth.models import User
 class OfficeForm(forms.ModelForm):
     class Meta:
@@ -22,12 +22,3 @@ class UserForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2')
 
-class ProjectDetailForm(forms.ModelForm):
-    class Meta:
-        model = ProjectDetail
-        exclude = ('office',)
-
-class MunicipalityDetailForm(forms.ModelForm):
-    class Meta:
-        model = MunicipalityDetail
-        exclude = ('office', )
