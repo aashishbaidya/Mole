@@ -7,8 +7,8 @@ from django.views.generic import ListView, TemplateView, DetailView
 from django.shortcuts import render, get_object_or_404
 
 from reports.models import KaryaKram
-from .models import Office, ProjectDetail, MunicipalityDetail, District
-from .forms import OfficeForm, UserForm, MunicipalityDetailForm, ProjectDetailForm, OfficeEditForm
+from .models import Office,District
+from .forms import OfficeForm, UserForm,OfficeEditForm
 
 from userrole.mixins import CreateView, UpdateView, DeleteView, OfficerMixin, AdminAssistantMixin
 
@@ -32,16 +32,6 @@ class OfficeView(object):
     model = Office
     success_url = reverse_lazy('office:office-list')
     form_class = OfficeForm
-
-class ProjectView(object):
-    model = ProjectDetail
-    success_url = reverse_lazy('office:office-list')
-    form_class = ProjectDetailForm
-
-class MunicipalityView(object):
-    model = MunicipalityDetail
-    success_url = reverse_lazy('office:office-list')
-    form_class = MunicipalityDetailForm
 
 class OfficeUserView(LoginRequiredMixin, TemplateView):
     template_name = 'office/users.html'
@@ -76,13 +66,7 @@ class OfficeCreateView(LoginRequiredMixin, AdminAssistantMixin, OfficeView, Crea
 
     
     def get_success_url(self):
-        
-        if self.object.is_municipality == True:
-            return reverse('office:office-add-municipilaty',args=(self.object.id,))    
-        elif self.object.is_project == True:
-            return reverse('office:office-add-project',args=(self.object.id,))
-        else:
-            return reverse_lazy('office:office-list')
+        return reverse_lazy('office:office-list')
 
 class OfficeUpdateView(LoginRequiredMixin, OfficerMixin, OfficeView, UpdateView):
     template_name = 'office/office-update.html'
@@ -91,49 +75,6 @@ class OfficeUpdateView(LoginRequiredMixin, OfficerMixin, OfficeView, UpdateView)
 
 class OfficeDeleteView(LoginRequiredMixin, AdminAssistantMixin, OfficeView, DeleteView):
     pass
-
-class OfficeAddMunicipilaty(LoginRequiredMixin, AdminAssistantMixin, OfficeView, View):
-    def get(self, request, pk):
-        form_type = MunicipalityDetailForm()
-        return render(request, 'office/add_office_detail.html', {'form': form_type, 'id':pk})
-
-    def post(self, request, *args, **kwargs):
-            office_id = request.POST.get('office_id')
-            details =MunicipalityDetailForm(request.POST)
-
-            if details.is_valid():
-                    detail =  details.save(commit=False)
-                    detail.office = Office.objects.get(id=office_id)
-                    detail.save()
-
-
-            return redirect('office:office-dashboard', pk=office_id)
-
-
-class ProjectUpdate(LoginRequiredMixin, OfficerMixin, ProjectView, UpdateView): 
-    template_name = 'office/update-project-municipality.html'
-     
-
-class MunicipalityUpdate(LoginRequiredMixin, OfficerMixin, MunicipalityView, View):
-    template_name = 'office/update-project-municipality.html'
-
-class OfficeAddProject(LoginRequiredMixin, AdminAssistantMixin, OfficeView, View):
-    def get(self, request, pk):
-        form_type = ProjectDetailForm()
-        return render(request, 'office/add_office_detail.html', {'form': form_type, 'id':pk})
-
-    def post(self, request, *args, **kwargs):
-            office_id = request.POST.get('office_id')
-            details =ProjectDetailForm(request.POST)
-
-            if details.is_valid():
-                    detail =  details.save(commit=False)
-                    detail.office = Office.objects.get(id=office_id)
-                    detail.save()
-                    #return redirect('question_detail', pk=question.pk)
-            return redirect('office:office-dashboard', pk=office_id)
-
-
 
 class OfficeAddOfficeHeadView(LoginRequiredMixin, AdminAssistantMixin, OfficeView, View):
     def get(self, request, pk):
@@ -207,7 +148,6 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(DashboardView, self).get_context_data(**kwargs)
         context['offices'] = Office.objects.all()
-        context['projects'] = Office.objects.filter(is_project=True)
         context['submission_count'] = 0
         context['offices_count'] = Office.objects.all().count()
         context['users_count'] = User.objects.all().count()
